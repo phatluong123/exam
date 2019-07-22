@@ -1,0 +1,19 @@
+
+.registration{
+    display: inline-block;
+    width: 400px;
+    margin: 50px 0 0 200px;
+}
+
+.login {
+    display: inline-block;
+    vertical-align: top;
+    margin: 50px 0 0 200px;
+    width: 400px;
+}
+.alert-box{
+    color:red;
+}
+h1{
+    margin-left: 200px;
+}

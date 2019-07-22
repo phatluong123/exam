@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>newjob</title>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/newjob.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="top-section">
+        <h1 style="display:inline-block">Welcome,{{ user }} let create new job</h1>
+        <a style="margin-top:30px; float:right; display:inline-block" href="/logout">log out</a>
+        <hr>
+    </div>
+
+    <form class="new-job" method="post" action="/jobs/new/process">
+        <h1>Registration</h1>
+        <div class="form-group">
+            <label>Title :</label>
+            <input type="text" class="form-control" name="title"  placeholder="Title">
+            <div class="alert-box">
+                {% with msg = get_flashed_messages(category_filter=['title']) %}
+                    {% if msg %}
+                        <p>{{msg[0]}}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" name="description"  placeholder="Description">
+            <div class="alert-box">
+                {% with msg = get_flashed_messages(category_filter=['description']) %}
+                    {% if msg %}
+                        <p>{{msg[0]}}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" class="form-control" name="location" placeholder="Location">
+            <div class="alert-box">
+                {% with msg = get_flashed_messages(category_filter=['location']) %}
+                    {% if msg %}
+                        <p>{{msg[0]}}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Catergory</label>
+        <p>
+                {% for category in categories %}
+                <input type="checkbox" name="category1" value="{{ category.id }}"> {{ category.type }}{{ category.id }}<br>
+                {% endfor %}
+        </p>
+            <p>or</p>
+            <input type="text" class="form-control" name="category2" placeholder="Catergory">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+             <a href="/logged">Cancel</a>
+        </div>
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="top-section">
+        <h1 style="display:inline-block">Welcome,{{ user }} let edit your  job</h1>
+        <a style="margin-top:30px; float:right; display:inline-block" href="/logout">log out</a>
+        <hr>
+    </div>
+
+    <form class="edit-job" method="post" action="/jobs/edit/{{ job[0].id }}/process">
+        <h1>Registration</h1>
+        <div class="form-group">
+            <label>Title :</label>
+            <input type="text" class="form-control" name="title"  placeholder="{{ job[0].title }}">
+            <div class="alert-box">
+                {% with msg = get_flashed_messages(category_filter=['title']) %}
+                    {% if msg %}
+                        <p>{{msg[0]}}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" name="description"  placeholder="{{ job[0].description }}">
+            <div class="alert-box">
+                {% with msg = get_flashed_messages(category_filter=['description']) %}
+                    {% if msg %}
+                        <p>{{msg[0]}}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" class="form-control" name="location" placeholder="{{ job[0].location}}">
+            <div class="alert-box">
+                {% with msg = get_flashed_messages(category_filter=['location']) %}
+                    {% if msg %}
+                        <p>{{msg[0]}}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+             <a href="/logged">Cancel</a>
+        </div>
+    </form>
+
+</body>
+</html>

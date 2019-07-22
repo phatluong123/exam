@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>view pages</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/views.css') }}">
+</head>
+<body>
+        <div class="top-section">
+        <h1 style="display:inline-block">Welcome,{{ user }} this is job detail</h1>
+            <a style="margin-top:30px; float:right; display:inline-block" href="/logout">log out</a>
+            <a style="margin:30px 50px; float:right; display:inline-block" href="/logged">Dashboard</a>
+
+        <hr>
+        </div>
+    <div>
+        <h2>{{ job[0].title }}</h2>
+        <div class="detail">
+            <p>Description :{{ job[0].description }}</p>
+            <p>Location : {{ job[0].location }}</p>
+            <p>Created at : {{ job[0].created_at }}</p>
+            <p>Categories :
+            {% if categories %}
+            {% for cat in categories %}
+             {{ cat.type }}
+            {% endfor %}</p>
+        {% endif %}
+        </div>
+        {% if job[0].work_id != session.user_id %}
+            <a href="/add/{{ job[0].id }}">Add to your job</a>
+        {% endif %}
+        {% if job[0].work_id == session.user_id %}
+            <a href="/giveup/{{job[0].id }}">Give Up | </a>
+        {% endif %}
+
+    </div>
+</body>
+</html>
